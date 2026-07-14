@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Secrets & credentials — never commit these
+serviceAccountKey.json
+cloudinary_config.py
+.env
+.env.*
+
+# Local runtime data
+users.txt
+access_log.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/

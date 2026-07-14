@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Uniform System - Login</title>
+    <meta name="description" content="AI Uniform System - Modern guidance counselor portal for uniform compliance management">
+    <meta name="keywords" content="uniform, guidance, school, management, AI">
+    <meta name="author" content="AI Uniform System">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: #1877f2;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .logo p {
+            color: #65676b;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1c1e21;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e4e6ea;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #1877f2;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-btn:hover {
+            background: #166fe5;
+        }
+        
+        .demo-credentials {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .demo-credentials h3 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+        
+        .demo-credentials p {
+            color: #1976d2;
+            margin: 5px 0;
+        }
+        
+        .error {
+            color: #e41e3f;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: #ffeaea;
+            border-radius: 6px;
+        }
+        
+        .success {
+            color: #42b883;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: #e8f5e8;
+            border-radius: 6px;
+        }
+        
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .login-container {
+                padding: 30px 20px;
+                margin: 10px;
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .logo h1 {
+                font-size: 24px;
+            }
+            
+            .logo p {
+                font-size: 14px;
+            }
+            
+            .form-group input {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            .login-btn {
+                font-size: 16px;
+                padding: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px 15px;
+            }
+            
+            .logo h1 {
+                font-size: 20px;
+            }
+            
+            .demo-credentials {
+                padding: 12px;
+            }
+            
+            .demo-credentials h3 {
+                font-size: 14px;
+            }
+            
+            .demo-credentials p {
+                font-size: 12px;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1877f2;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Button Hover Effects */
+        .login-btn:active {
+            transform: translateY(1px);
+        }
+        
+        /* Focus States */
+        .form-group input:focus {
+            outline: none;
+            border-color: #1877f2;
+            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+        }
+        
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .spinner {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>🎓 AI Uniform System</h1>
+            <p>Guidance Counselor Portal</p>
+        </div>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="login-btn">🔐 LOG IN</button>
+        </form>
+        
+        <div class="demo-credentials">
+            <h3>🔑 Demo Credentials</h3>
+            <p><strong>Username:</strong> guidance1</p>
+            <p><strong>Password:</strong> guidance123</p>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Loading State -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Signing you in...</p>
+        </div>
+    </div>
+    
+    <script>
+        // Enhanced form handling with loading states
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const loginBtn = document.querySelector('.login-btn');
+            const loading = document.getElementById('loading');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            
+            // Auto-focus on username field
+            usernameInput.focus();
+            
+            // Form submission with loading state
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value;
+                
+                // Basic validation
+                if (!username || !password) {
+                    showError('Please enter both username and password');
+                    return;
+                }
+                
+                // Show loading state
+                loginBtn.style.display = 'none';
+                loading.style.display = 'block';
+                
+                // Submit form
+                setTimeout(() => {
+                    form.submit();
+                }, 500);
+            });
+            
+            // Quick fill demo credentials
+            function quickFillDemo() {
+                usernameInput.value = 'guidance1';
+                passwordInput.value = 'guidance123';
+                showSuccess('Demo credentials filled!');
+            }
+            
+            // Add quick fill button if not exists
+            if (!document.querySelector('.quick-fill-btn')) {
+                const quickFillBtn = document.createElement('button');
+                quickFillBtn.type = 'button';
+                quickFillBtn.className = 'quick-fill-btn';
+                quickFillBtn.textContent = '⚡ Quick Fill Demo';
+                quickFillBtn.style.cssText = `
+                    width: 100%;
+                    padding: 10px;
+                    margin-top: 10px;
+                    background: #f0f2f5;
+                    color: #1877f2;
+                    border: 2px solid #1877f2;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: 600;
+                `;
+                quickFillBtn.onclick = quickFillDemo;
+                form.appendChild(quickFillBtn);
+            }
+            
+            // Show/hide password functionality
+            function togglePassword() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+            }
+            
+            // Add show/hide password button
+            if (!document.querySelector('.toggle-password')) {
+                const toggleBtn = document.createElement('button');
+                toggleBtn.type = 'button';
+                toggleBtn.className = 'toggle-password';
+                toggleBtn.textContent = '👁️ Show Password';
+                toggleBtn.style.cssText = `
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 16px;
+                `;
+                
+                const passwordGroup = passwordInput.parentElement;
+                passwordGroup.style.position = 'relative';
+                passwordGroup.appendChild(toggleBtn);
+                
+                toggleBtn.onclick = function() {
+                    togglePassword();
+                    this.textContent = passwordInput.type === 'password' ? '👁️ Show Password' : '🙈 Hide Password';
+                };
+            }
+            
+            // Error and success message functions
+            function showError(message) {
+                const existing = document.querySelector('.error, .success');
+                if (existing) existing.remove();
+                
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error';
+                errorDiv.textContent = message;
+                form.appendChild(errorDiv);
+                
+                setTimeout(() => errorDiv.remove(), 5000);
+            }
+            
+            function showSuccess(message) {
+                const existing = document.querySelector('.error, .success');
+                if (existing) existing.remove();
+                
+                const successDiv = document.createElement('div');
+                successDiv.className = 'success';
+                successDiv.textContent = message;
+                form.appendChild(successDiv);
+                
+                setTimeout(() => successDiv.remove(), 3000);
+            }
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && e.ctrlKey) {
+                    quickFillDemo();
+                }
+            });
+            
+            // Input validation feedback
+            usernameInput.addEventListener('input', function() {
+                this.style.borderColor = this.value.trim() ? '#42b883' : '#e4e6ea';
+            });
+            
+            passwordInput.addEventListener('input', function() {
+                this.style.borderColor = this.value ? '#42b883' : '#e4e6ea';
+            });
+        });
+    </script>
+</body>
+</html>
